@@ -20,13 +20,17 @@ class App extends Component {
     ],
     name: 'Kek',
     info: 'top',
+    showPersons: false,
   }
   switchNameHandler = (newName) => {
     this.setState({
       name: newName,
     })
   }
-
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({ showPersons: !doesShow })
+  };
   changeNameHandler = (event) => {
     this.setState({
       name: event.target.value
@@ -46,17 +50,21 @@ class App extends Component {
         <h1>Hi, I'm a react app!</h1>
         <button
           style={ styles }
-          onClick={() => this.switchNameHandler('Kotyaktee') }>Switch name</button>
-        <Person 
-          name={ this.state.name } 
-          info={ this.state.info }>
-              And I am Myau
-        </Person>
-        <Person 
-          name={ this.state.name }
-          info={ this.state.info }
-          click={ this.switchNameHandler.bind(this, "Kotyamby!") }
-          changed={ this.changeNameHandler } />
+          onClick={ this.togglePersonsHandler }>Switch name</button>
+        {this.state.showPersons ?
+          <div>
+            <Person 
+              name={ this.state.name } 
+              info={ this.state.info }>
+                  And I am Myau
+            </Person>
+            <Person 
+              name={ this.state.name }
+              info={ this.state.info }
+              click={ this.switchNameHandler.bind(this, "Kotyamby!") }
+              changed={ this.changeNameHandler } />
+          </div> : null
+        }
       </div>
     );
   }
