@@ -36,6 +36,7 @@ class App extends Component {
       name: event.target.value
     })
   };
+  
   render() {
     const styles = {
       backgroundColor: 'tomato',
@@ -45,26 +46,32 @@ class App extends Component {
       cursor: 'pointer',
       color: 'white',
     };
+
+    let persons = null;
+
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          <Person 
+            name={ this.state.name } 
+            info={ this.state.info }>
+                And I am Myau
+          </Person>
+          <Person 
+            name={ this.state.name }
+            info={ this.state.info }
+            click={ this.switchNameHandler.bind(this, "Kotyamby!") }
+            changed={ this.changeNameHandler } />
+        </div>
+      );
+    }
     return (
       <div className="App">
         <h1>Hi, I'm a react app!</h1>
         <button
           style={ styles }
-          onClick={ this.togglePersonsHandler }>Switch name</button>
-        {this.state.showPersons ?
-          <div>
-            <Person 
-              name={ this.state.name } 
-              info={ this.state.info }>
-                  And I am Myau
-            </Person>
-            <Person 
-              name={ this.state.name }
-              info={ this.state.info }
-              click={ this.switchNameHandler.bind(this, "Kotyamby!") }
-              changed={ this.changeNameHandler } />
-          </div> : null
-        }
+          onClick={ this.togglePersonsHandler }>Toggle persons</button>
+          { persons }
       </div>
     );
   }
