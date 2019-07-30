@@ -8,32 +8,44 @@ class App extends Component {
       {
         name: 'Murcheekee',
         info: 11,
+        id: 'id0',
       },
       {
         name: 'Koteekee',
         info: 22,
+        id: 'id1',
       },
       {
         name: 'Kotyamby',
         info: 33,
+        id: 'id2',
       },
     ],
     name: 'Kek',
     info: 'top',
     showPersons: false,
   }
-  switchNameHandler = (newName) => {
-    this.setState({
-      name: newName,
-    })
+  deletePersonHandler = (i) => {
+    const persons = this.state.persons;
+    persons.splice(i, 1);
+    this.setState({ persons });
   }
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
     this.setState({ showPersons: !doesShow })
   };
-  changeNameHandler = (event) => {
+  changeNameHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex((elm) => elm.id === id);
+    const person = {
+      ...this.state.persons[personIndex]
+    };
+    person.name = event.target.value;
+
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
     this.setState({
-      name: event.target.value
+      persons: persons,
     })
   };
   
@@ -52,16 +64,34 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          <Person 
-            name={ this.state.name } 
-            info={ this.state.info }>
+          {
+            this.state.persons.map((person, i) =>
+            (
+              <Person
+                click={ () => this.deletePersonHandler(i) }
+                changed={ (event) =>  this.changeNameHandler(event, person.id) }
+                name={ person.name }
+                info={ person.info }
+                key={ person.id }>
+                    And I am Myau :3
+              </Person>
+            ))
+          }
+          {/* <Person 
+            name={ this.state.persons[0].name }
+            info={ this.state.persons[0].info }>
                 And I am Myau
           </Person>
           <Person 
-            name={ this.state.name }
-            info={ this.state.info }
+            name={ this.state.persons[1].name }
+            info={ this.state.persons[1].info }
             click={ this.switchNameHandler.bind(this, "Kotyamby!") }
             changed={ this.changeNameHandler } />
+          <Person 
+            name={ this.state.persons[2].name }
+            info={ this.state.persons[2].info }>
+                And I am :3
+          </Person> */}
         </div>
       );
     }
