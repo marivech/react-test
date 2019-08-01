@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from'./App.css';
 import Person from './Person/Person'
 
 class App extends Component {
@@ -98,18 +98,18 @@ class App extends Component {
       styles.backgroundColor = 'blue';
     }
 
-    const classes = [];
+    const paragraphClasses = [];
 
     if (this.state.persons.length < 2) {
-      classes.push('few-persons')
+      paragraphClasses.push(classes.fewPersons)
     } else if (this.state.persons.length < 3) {
-      classes.push('enough-persons')
+      paragraphClasses.push(classes.enoughPersons)
     }
 
       return (
-          <div className="App">
+          <div className={ classes.App } >
             <h1>Hi, I'm a react app!</h1>
-            <p className={ classes.join(' ') }>It's a test string</p>
+            <p className={ paragraphClasses.join(' ') }>It's a test string</p>
             <button
               style={ styles }
               onClick={ this.togglePersonsHandler }>Toggle persons</button>
