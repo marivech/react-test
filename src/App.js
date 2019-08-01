@@ -50,16 +50,8 @@ class App extends Component {
   };
   
   render() {
-    const styles = {
-      backgroundColor: 'tomato',
-      border: '1px solid #ccc',
-      borderRadius: '10px',
-      padding: '12px',
-      cursor: 'pointer',
-      color: 'white',
-    };
-
     let persons = null;
+    let btnClass = '';
 
     if (this.state.showPersons) {
       persons = (
@@ -77,25 +69,9 @@ class App extends Component {
               </Person>
             ))
           }
-          {/* <Person 
-            name={ this.state.persons[0].name }
-            info={ this.state.persons[0].info }>
-                And I am Myau
-          </Person>
-          <Person 
-            name={ this.state.persons[1].name }
-            info={ this.state.persons[1].info }
-            click={ this.switchNameHandler.bind(this, "Kotyamby!") }
-            changed={ this.changeNameHandler } />
-          <Person 
-            name={ this.state.persons[2].name }
-            info={ this.state.persons[2].info }>
-                And I am :3
-          </Person> */}
         </div>
       );
-
-      styles.backgroundColor = 'blue';
+      btnClass = classes.Red;
     }
 
     const paragraphClasses = [];
@@ -111,7 +87,7 @@ class App extends Component {
             <h1>Hi, I'm a react app!</h1>
             <p className={ paragraphClasses.join(' ') }>It's a test string</p>
             <button
-              style={ styles }
+              className= { btnClass }
               onClick={ this.togglePersonsHandler }>Toggle persons</button>
               { persons }
           </div>
